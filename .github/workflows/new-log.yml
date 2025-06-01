@@ -24,15 +24,15 @@ jobs:
       - name: Create new ritual file
         run: |
           FILE="day-$DAY_NUM.md"
-          echo "# Ritual Log – Day $DAY_NUM" > $FILE
-          echo "" >> $FILE
-          echo "**Date:** $(date +%Y-%m-%d)" >> $FILE
-          echo "**Start Time:**" >> $FILE
-          echo "**Focus of the Session:**" >> $FILE
-          echo "**What I Did:**" >> $FILE
-          echo "**Mood (Before → After):**" >> $FILE
-          echo "**Distractions / Resistance:**" >> $FILE
-          echo "**One Line Summary:**" >> $FILE
+          echo "# Ritual Log – Day $DAY_NUM" > "$FILE"
+          echo "" >> "$FILE"
+          echo "**Date:** $(date +%Y-%m-%d)" >> "$FILE"
+          echo "**Start Time:**" >> "$FILE"
+          echo "**Focus of the Session:**" >> "$FILE"
+          echo "**What I Did:**" >> "$FILE"
+          echo "**Mood (Before → After):**" >> "$FILE"
+          echo "**Distractions / Resistance:**" >> "$FILE"
+          echo "**One Line Summary:**" >> "$FILE"
         env:
           DAY_NUM: ${{ env.day_num }}
 
@@ -40,7 +40,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add day-$DAY_NUM.md
+          git add "day-$DAY_NUM.md"
           git commit -m "Add ritual log for day $DAY_NUM"
           git push
         env:
