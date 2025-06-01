@@ -23,17 +23,18 @@ jobs:
 
       - name: Create new ritual file
         run: |
-          echo "# Ritual Log – Day ${{ env.day_num }}" > day-${{ env.day_num }}.md
-          echo "" >> day-${{ env.day_num }}.md
-          echo "**Date:** $(date +%Y-%m-%d)" >> day-${{ env.day_num }}.md
-          echo "**Start Time:**" >> day-${{ env.day_num }}.md
-          echo "**Focus of the Session:**" >> day-${{ env.day_num }}.md
-          echo "**What I Did:**" >> day-${{ env.day_num }}.md
-          echo "**Mood (Before → After):**" >> day-${{ env.day_num }}.md
-          echo "**Distractions / Resistance:**" >> day-${{ env.day_num }}.md
-          echo "**One Line Summary:**" >> day-${{ env.day_num }}.md
+          FILE="day-${{ env.day_num }}.md"
+          echo "# Ritual Log – Day ${{ env.day_num }}" > $FILE
+          echo "" >> $FILE
+          echo "**Date:** $(date +%Y-%m-%d)" >> $FILE
+          echo "**Start Time:**" >> $FILE
+          echo "**Focus of the Session:**" >> $FILE
+          echo "**What I Did:**" >> $FILE
+          echo "**Mood (Before → After):**" >> $FILE
+          echo "**Distractions / Resistance:**" >> $FILE
+          echo "**One Line Summary:**" >> $FILE
 
-      - name: Commit and push
+      - name: Commit and push new log
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
