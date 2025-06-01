@@ -1,0 +1,40 @@
+name: Create New Ritual Log
+
+on:
+  workflow_dispatch:
+
+jobs:
+  new-log:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Get latest day number
+        id: get_day
+        run: |
+          latest=$(ls | grep '^day-[0-9]\+\.md$' | sed 's/day-\([0-9]\+\).md/\1/' | sort -n | tail -1)
+          next=$((latest + 1))
+          echo "day_num=$next" >> $GITHUB_ENV
+
+      - name: Create new ritual file
+        run: |
+          cat <<EOF > day-${{ env.day_num }}.md
+# Ritual Log – Day ${{ env.day_num }}
+
+**Date:** $(date +%Y-%m-%d)  
+**Start Time:**  
+**Focus of the Session:**  
+**What I Did:**  
+**Mood (Before → After):**  
+**Distractions / Resistance:**  
+**One Line Summary:**  
+EOF
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add day-${{ env.day_num }}.md
+          git commit -m "Add ritual log for day ${{ env.day_num }}"
+          git push
