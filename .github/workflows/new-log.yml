@@ -33,18 +33,4 @@ jobs:
           echo "**Focus of the Session:**" >> "$FILE"
           echo "**What I Did:**" >> "$FILE"
           echo "**Mood (Before → After):**" >> "$FILE"
-          echo "**Distractions / Resistance:**" >> "$FILE"
-          echo "**One Line Summary:**" >> "$FILE"
-
-      - name: Commit and push new log
-        env:
-          DAY
-      - name: Commit and push new log
-        env:
-          DAY_NUM: ${{ env.day_num }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add "day-$DAY_NUM.md"
-          git commit -m "Add Project Veena log for day $DAY_NUM"
-          git push
+          echo
