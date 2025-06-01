@@ -14,22 +14,24 @@ jobs:
         id: get_day
         run: |
           latest=$(ls | grep '^day-[0-9]\+\.md$' | sed 's/day-\([0-9]\+\).md/\1/' | sort -n | tail -1)
-          next=$((latest + 1))
+          if [ -z "$latest" ]; then
+            next=1
+          else
+            next=$((latest + 1))
+          fi
           echo "day_num=$next" >> $GITHUB_ENV
 
       - name: Create new ritual file
         run: |
-          cat <<EOF > day-${{ env.day_num }}.md
-# Ritual Log – Day ${{ env.day_num }}
-
-**Date:** $(date +%Y-%m-%d)  
-**Start Time:**  
-**Focus of the Session:**  
-**What I Did:**  
-**Mood (Before → After):**  
-**Distractions / Resistance:**  
-**One Line Summary:**  
-EOF
+          echo "# Ritual Log – Day ${{ env.day_num }}" > day-${{ env.day_num }}.md
+          echo "" >> day-${{ env.day_num }}.md
+          echo "**Date:** $(date +%Y-%m-%d)" >> day-${{ env.day_num }}.md
+          echo "**Start Time:**" >> day-${{ env.day_num }}.md
+          echo "**Focus of the Session:**" >> day-${{ env.day_num }}.md
+          echo "**What I Did:**" >> day-${{ env.day_num }}.md
+          echo "**Mood (Before → After):**" >> day-${{ env.day_num }}.md
+          echo "**Distractions / Resistance:**" >> day-${{ env.day_num }}.md
+          echo "**One Line Summary:**" >> day-${{ env.day_num }}.md
 
       - name: Commit and push
         run: |
