@@ -1,4 +1,4 @@
-name: Create New Ritual Log
+name: Create New Project Veena Log
 
 on:
   workflow_dispatch:
@@ -22,9 +22,11 @@ jobs:
           echo "day_num=$next" >> $GITHUB_ENV
 
       - name: Create new ritual file
+        env:
+          DAY_NUM: ${{ env.day_num }}
         run: |
           FILE="day-$DAY_NUM.md"
-          echo "# Ritual Log – Day $DAY_NUM" > "$FILE"
+          echo "# Project Veena – Day $DAY_NUM" > "$FILE"
           echo "" >> "$FILE"
           echo "**Date:** $(date +%Y-%m-%d)" >> "$FILE"
           echo "**Start Time:**" >> "$FILE"
@@ -33,15 +35,7 @@ jobs:
           echo "**Mood (Before → After):**" >> "$FILE"
           echo "**Distractions / Resistance:**" >> "$FILE"
           echo "**One Line Summary:**" >> "$FILE"
-        env:
-          DAY_NUM: ${{ env.day_num }}
 
       - name: Commit and push new log
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add "day-$DAY_NUM.md"
-          git commit -m "Add ritual log for day $DAY_NUM"
-          git push
         env:
-          DAY_NUM: ${{ env.day_num }}
+          DAY
