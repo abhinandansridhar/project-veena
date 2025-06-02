@@ -1,0 +1,29 @@
+body {
+  font-family: sans-serif;
+  background: #fff;
+  color: #111;
+  margin: 0;
+  padding: 2rem;
+}
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+li {
+  margin-bottom: 0.75rem;
+}
+a {
+  text-decoration: none;
+  color: #1a0dab;
+}
+a:hover {
+  text-decoration: underline;
+}
