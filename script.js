@@ -1,4 +1,4 @@
-fetch('https://api.github.com/repos/abhinandansridhar/project-veena/contents')
+fetch('https://api.github.com/repos/abhinandansridhar/project-veena/contents/logs')
   .then(res => res.json())
   .then(files => {
     const list = document.getElementById('log-list');
